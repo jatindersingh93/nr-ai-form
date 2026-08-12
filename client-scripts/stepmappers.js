@@ -212,8 +212,6 @@
 
   function getGroupKey(element) {
     if (!element) return null;
-    var dataId = element.getAttribute && element.getAttribute('data-id');
-    if (dataId) return 'data-id:' + dataId;
     var name = element.getAttribute && element.getAttribute('name');
     if (name) return 'name:' + name.replace(/_\d+$/i, '');
     var id = element.getAttribute && element.getAttribute('id');
@@ -338,7 +336,7 @@
 
           fields.push({
             domIndex: index,
-            name: groupMembers[0].getAttribute('data-id') || groupMembers[0].getAttribute('name') || groupMembers[0].getAttribute('id') || '',
+            name: groupMembers[0].getAttribute('name') || groupMembers[0].getAttribute('id') || '',
             type: 'radio',
             label: inferGroupLabel(groupMembers[0]),
             currentValue: selectedValue,
@@ -377,9 +375,6 @@
     if (byName) {
       var exactMatch = documentRef.querySelector('[name="' + String(byName).replace(/"/g, '\\"') + '"]');
       if (exactMatch) return exactMatch;
-
-      var dataIdMatch = documentRef.querySelector('[data-id="' + String(byName).replace(/"/g, '\\"') + '"]');
-      if (dataIdMatch) return dataIdMatch;
 
       var idMatch = documentRef.querySelector('[id*="' + String(byName).replace(/"/g, '\\"') + '"]');
       if (idMatch) return idMatch;
